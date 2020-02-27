@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: com.ivarprudnikov.auth0
+---
+testFramework: kotlintest
+sourceLanguage: kotlin
