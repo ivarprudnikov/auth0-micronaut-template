@@ -1,3 +1,22 @@
 micronaut:
   application:
     name: auth0-micronaut-template
+  server:
+    cors:
+      enabled: true
+  security:
+    enabled: true
+    endpoints:
+      login:
+        enabled: false
+      oauth:
+        enabled: false
+    token:
+      enabled: true
+      roles-name: "roles"
+      jwt:
+        enabled: true
+        signatures:
+          jwks:
+            auth0:
+              url: "https://ivarprudnikov.eu.auth0.com/.well-known/jwks.json"
