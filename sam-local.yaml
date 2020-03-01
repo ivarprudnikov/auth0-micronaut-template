@@ -13,11 +13,16 @@ Resources:
     Properties:
       Handler: com.ivarprudnikov.auth0.StreamLambdaHandler::handleRequest
       Runtime: java8
-      CodeUri: build/exploded
+      CodeUri: build/libs/auth0-micronaut-template-1.0-all.jar
       MemorySize: 320
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 15
       Events:
+        RootEndpoint:
+          Type: Api
+          Properties:
+            Path: /
+            Method: any
         GetResource:
           Type: Api
           Properties:
