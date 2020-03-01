@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer
+
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.3.50"
     id "org.jetbrains.kotlin.kapt" version "1.3.50"
@@ -27,15 +29,19 @@ dependencies {
     implementation "io.micronaut:micronaut-http-server-netty"
     implementation "io.micronaut:micronaut-http-client"
     implementation "io.micronaut:micronaut-security-jwt"
-    implementation 'io.micronaut.aws:micronaut-function-aws-api-proxy'
+    implementation('io.micronaut.aws:micronaut-function-aws-api-proxy') {
+        exclude group: "org.apache.httpcomponents"
+        exclude group: "org.slf4j"
+    }
     kapt platform("io.micronaut:micronaut-bom:$micronautVersion")
     kapt "io.micronaut:micronaut-inject-java"
     kapt "io.micronaut:micronaut-validation"
     kapt "io.micronaut:micronaut-security"
     kaptTest platform("io.micronaut:micronaut-bom:$micronautVersion")
     kaptTest "io.micronaut:micronaut-inject-java"
+    runtimeOnly "org.apache.logging.log4j:log4j-slf4j-impl:2.12.1"
+    runtimeOnly "com.amazonaws:aws-lambda-java-log4j2:1.1.0"
     runtimeOnly "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
-    runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
     testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
     testImplementation "io.micronaut.test:micronaut-test-kotlintest"
     testImplementation "io.mockk:mockk:1.9.3"
@@ -71,6 +77,7 @@ compileTestKotlin {
 
 shadowJar {
     mergeServiceFiles()
+    transform(Log4j2PluginsCacheFileTransformer)
 }
 
 tasks.withType(JavaExec) {
