@@ -6,6 +6,7 @@ micronaut:
       enabled: true
   security:
     enabled: true
+    ip-patterns: []
     endpoints:
       login:
         enabled: false
