@@ -18,6 +18,7 @@ Resources:
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 15
       Events:
+        # hardcoded root / endpoint, otherwise locally does not respond
         RootEndpoint:
           Type: Api
           Properties:
