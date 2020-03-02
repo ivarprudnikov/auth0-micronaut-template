@@ -11,11 +11,11 @@
         <Root level="error">
             <AppenderRef ref="Lambda"/>
         </Root>
-        <Logger name="io.micronaut" level="error" additivity="true">
-            <appender-ref ref="Lambda" level="error"/>
-        </Logger>
-        <Logger name="com.ivarprudnikov.auth0" level="debug" additivity="true">
+        <Logger name="io.micronaut" level="info" additivity="true">
             <appender-ref ref="Lambda" level="debug"/>
+        </Logger>
+        <Logger name="com.ivarprudnikov.auth0" level="trace" additivity="true">
+            <appender-ref ref="Lambda" level="trace"/>
         </Logger>
     </Loggers>
 </Configuration>
