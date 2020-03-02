@@ -7,6 +7,35 @@ Auth0 Micronaut template
 
 Example should serve as a template when necessary to write a small service which uses JWT tokens signed by Auth0 server.
 
+## Development
+
+### Running locally
+
+Start [Micronaut server](https://docs.micronaut.io/latest/guide/index.html#creatingServer)
+
+```shell script
+./geadlew run
+```
+
+Then to check status
+
+```shell script
+curl http://localhost:8080
+UP%
+```
+
+### Running with SAM
+
+This requires Docker to be running locally and `sam` CLI installed.
+
+```shell script
+sam local start-api
+Mounting ExampleFunction at http://127.0.0.1:3000/ [DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT]
+Mounting ExampleFunction at http://127.0.0.1:3000/{proxy+} [DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT]
+You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. You only need to restart SAM CLI if you update your AWS SAM template
+2020-03-02 22:16:20  * Running on http://127.0.0.1:3000/ (Press CTRL+C to quit)
+```
+
 ## Packaging and deployment
 
 Utilizing AWS Lambda to make sure I'm not paying for idle time.
