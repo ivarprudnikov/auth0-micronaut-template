@@ -7,6 +7,13 @@ Auth0 Micronaut template
 
 Example should serve as a template when necessary to write a small service which uses JWT tokens signed by Auth0 server.
 
+JWT config (by using JWKS) is visible in [application.yml](/src/main/resources/application.yml#L7). Controller endpoint then uses [`@Secured` annotation](src/main/kotlin/com/ivarprudnikov/auth0/IndexController.kt#L29).
+
+### API endpoints
+
+- `/` - returns status `UP` in plain text
+- `/me` - returns user `io.micronaut.security.authentication.Authentication` in  JSON response
+
 ## Development
 
 ### Running locally
