@@ -15,6 +15,8 @@ Resources:
   MainFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: auth0-micronaut-template-server
+      Description: Micronaut server running behing StreamLambdaHandler
       CodeUri: build/libs/auth0-micronaut-template-1.0-all.jar
       Handler: com.ivarprudnikov.auth0.StreamLambdaHandler::handleRequest
       Events:
