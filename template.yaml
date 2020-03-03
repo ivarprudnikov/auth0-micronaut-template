@@ -5,18 +5,18 @@ Description: Micronaut server utilizing proxy requests through API Gateway
 # SAM is CF, therefore Cloud Formation spec: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 # SAM Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
+  Function:
+    Runtime: java8
+    Timeout: 20
+    MemorySize: 320
   Api:
     EndpointConfiguration: EDGE
 Resources:
-  ExampleFunction:
+  MainFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.ivarprudnikov.auth0.StreamLambdaHandler::handleRequest
-      Runtime: java8
       CodeUri: build/libs/auth0-micronaut-template-1.0-all.jar
-      MemorySize: 320
-      Policies: AWSLambdaBasicExecutionRole
-      Timeout: 15
+      Handler: com.ivarprudnikov.auth0.StreamLambdaHandler::handleRequest
       Events:
         # hardcoded root / endpoint, otherwise locally does not respond
         RootEndpoint:
@@ -33,5 +33,8 @@ Resources:
 Outputs:
   ApiUrl:
     # here /Prod refers to implicitly created Prod stage
-    Description: root endpoint returns app status
+    Description: Main lambda endpoint
     Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
+  MainFunction:
+    Description: Lambda function ARN
+    Value: !GetAtt MainFunction.Arn
