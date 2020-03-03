@@ -1,7 +1,7 @@
 dist: xenial
-language: python
-python:
-- '3.7'
+language: java
+jdk: openjdk8
+python: '3.7.1'
 env:
   global:
   - AWS_DEFAULT_REGION=eu-west-1
@@ -13,8 +13,7 @@ install:
 - pip --version
 - pip install awscli aws-sam-cli
 - export PATH=$PATH:$HOME/.local/bin
-script:
-- sam validate
+script: ./gradlew build && sam validate
 deploy:
 - provider: script
   skip_cleanup: true
