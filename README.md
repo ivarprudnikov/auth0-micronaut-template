@@ -1,6 +1,8 @@
 Auth0 Micronaut template
 ======================== 
 
+[![Build Status](https://travis-ci.org/ivarprudnikov/auth0-micronaut-template.svg?branch=master)](https://travis-ci.org/ivarprudnikov/auth0-micronaut-template)
+
 [IN PROGRESS]
 
 ## About
