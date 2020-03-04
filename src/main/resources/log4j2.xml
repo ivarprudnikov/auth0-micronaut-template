@@ -9,7 +9,7 @@
     </Appenders>
     <Loggers>
         <!-- Set the root log level threshold and send output to Lambda appender -->
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="Lambda"/>
         </Root>
         <!-- Let some other debug messages through -->
