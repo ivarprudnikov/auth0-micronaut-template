@@ -8,7 +8,7 @@ Globals:
   Function:
     Runtime: java8
     Timeout: 20
-    MemorySize: 320
+    MemorySize: 1024
   Api:
     EndpointConfiguration: EDGE
 Resources:
