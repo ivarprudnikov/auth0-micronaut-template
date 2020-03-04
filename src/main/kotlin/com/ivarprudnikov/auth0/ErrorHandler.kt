@@ -13,9 +13,9 @@ import javax.inject.Singleton
 @Singleton
 @Requires(classes = [RuntimeException::class, ExceptionHandler::class])
 class ErrorHandler : ExceptionHandler<RuntimeException, HttpResponse<Any?>> {
-    var logger: Logger = LoggerFactory.getLogger(ErrorHandler::class.java)
+    private var logger: Logger = LoggerFactory.getLogger(ErrorHandler::class.java)
     override fun handle(request: HttpRequest<Any?>, exception: RuntimeException): HttpResponse<Any?> {
         logger.error(exception.message)
-        return HttpResponse.ok(0)
+        return HttpResponse.badRequest("Error :(")
     }
 }

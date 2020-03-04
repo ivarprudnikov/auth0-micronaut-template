@@ -3,19 +3,16 @@
     <Appenders>
         <Lambda name="Lambda">
             <PatternLayout>
-                <pattern>%d{yyyy-MM-dd HH:mm:ss} %X{AWSRequestId} %-5p %c{1}:%L - %m%n</pattern>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %X{AWSRequestId} %-5p %c:%L - %m%n</pattern>
             </PatternLayout>
         </Lambda>
     </Appenders>
     <Loggers>
-        <Root level="error">
+        <!-- Set the root log level threshold and send output to Lambda appender -->
+        <Root level="info">
             <AppenderRef ref="Lambda"/>
         </Root>
-        <Logger name="io.micronaut" level="info" additivity="true">
-            <appender-ref ref="Lambda" level="debug"/>
-        </Logger>
-        <Logger name="com.ivarprudnikov.auth0" level="trace" additivity="true">
-            <appender-ref ref="Lambda" level="trace"/>
-        </Logger>
+        <!-- Let some other debug messages through -->
+        <Logger name="com.ivarprudnikov.auth0" level="debug" additivity="true" />
     </Loggers>
 </Configuration>
