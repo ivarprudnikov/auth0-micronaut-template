@@ -2,7 +2,7 @@
 
 DOCKER_IMAGE_NAME=graalvm
 EXECUTABLE_NAME=serverbin
-MAIN_CLASS=com.ivarprudnikov.auth0.StreamLambdaHandler
+MAIN_CLASS=com.ivarprudnikov.auth0.Application
 APP_JAR=build/libs/auth0-micronaut-template-1.0-all.jar
 
 ./gradlew clean build --info
@@ -17,10 +17,10 @@ fi
 
 docker run --rm -it -v $(pwd):/func ${DOCKER_IMAGE_NAME} \
   -H:+TraceClassInitialization \
+  -H:+ReportExceptionStackTraces \
   -H:Name=${EXECUTABLE_NAME} \
-  --no-fallback \
-  --no-server \
-  --allow-incomplete-classpath \
   -H:Class=${MAIN_CLASS} \
+  -H:IncludeResources=logback.xml\|application.yml \
+  --no-server \
+  --no-fallback \
   -cp ${APP_JAR}
-
