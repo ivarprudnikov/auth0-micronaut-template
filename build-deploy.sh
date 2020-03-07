@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+./build-function-zip.sh
+
 BUCKET_NAME="${LAMBDA_S3_BUCKET_NAME:?S3 bucket name required}"
 
 if aws s3 ls s3://${BUCKET_NAME} 2>&1 | grep -q 'NoSuchBucket'; then

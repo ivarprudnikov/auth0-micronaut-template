@@ -14,11 +14,11 @@ install:
 - pip --version
 - pip install awscli aws-sam-cli
 - export PATH=$PATH:$HOME/.local/bin
-script: ./gradlew build && sam validate
+script: bash build-jar-to-bin.sh
 deploy:
 - provider: script
   skip_cleanup: true
-  script: bash deploy.sh
+  script: bash build-deploy.sh
   on:
     branch: master
     condition: "$TRAVIS_PULL_REQUEST = false"
