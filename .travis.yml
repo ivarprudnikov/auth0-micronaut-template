@@ -1,6 +1,8 @@
 dist: xenial
 language: java
 jdk: openjdk8
+services:
+  - docker
 env:
   global:
   - AWS_DEFAULT_REGION=eu-west-1
