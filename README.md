@@ -49,7 +49,9 @@ You can now browse to the above endpoints to invoke your functions. You do not n
 
 Utilizing AWS Lambda to make sure I'm not paying for idle time.
 
-Example micronaut implementation: https://github.com/micronaut-projects/micronaut-aws/tree/master/examples/api-gateway-example
+Example micronaut implementations: 
+- https://github.com/micronaut-projects/micronaut-aws/tree/master/examples/api-gateway-example
+- https://github.com/micronaut-guides/micronaut-function-aws-lambda
 Example micronaut implementations using Graal VM (native binaries): 
 - https://github.com/awslabs/aws-serverless-java-container/tree/master/samples/micronaut/pet-store
 - https://github.com/micronaut-guides/micronaut-creating-first-graal-app
