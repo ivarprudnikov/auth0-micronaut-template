@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Micronaut server utilizing proxy requests through API Gateway
+Description: Micronaut GraalVM server utilizing proxy requests through API Gateway
 # SAM spec: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md
 # SAM is CF, therefore Cloud Formation spec: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 # SAM Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
