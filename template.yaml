@@ -11,6 +11,7 @@ Resources:
   MainFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: auth0-micronaut-graal-template-server
       Handler: not.used.in.provided.runtime
       Runtime: provided
       CodeUri: function.zip
