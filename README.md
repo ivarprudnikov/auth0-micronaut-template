@@ -3,7 +3,9 @@ Auth0 Micronaut template
 
 [![Build Status](https://travis-ci.org/ivarprudnikov/auth0-micronaut-template.svg?branch=master)](https://travis-ci.org/ivarprudnikov/auth0-micronaut-template)
 
-[IN PROGRESS]
+## Live
+
+App is deployed to AWS Lambda: https://waucv5jon6.execute-api.eu-west-1.amazonaws.com/Prod/ 
 
 ## About
 
