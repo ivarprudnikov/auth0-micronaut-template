@@ -3,6 +3,7 @@ plugins {
     id "org.jetbrains.kotlin.kapt" version "1.3.50"
     id "org.jetbrains.kotlin.plugin.allopen" version "1.3.50"
     id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "net.ltgt.apt-idea" version "0.21"
     id "application"
 }
 
@@ -21,31 +22,46 @@ configurations {
 
 dependencies {
 
+    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
     implementation "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
 
-    // Graal VM support
-    implementation "org.graalvm.nativeimage:svm"
-    kapt "io.micronaut:micronaut-graal"
-
+    // Micronaut main deps
     implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
     kapt platform("io.micronaut:micronaut-bom:$micronautVersion")
     implementation "io.micronaut:micronaut-runtime"
     implementation "io.micronaut:micronaut-http-server-netty"
     implementation "io.micronaut:micronaut-http-client"
 
+    // DI
     implementation "io.micronaut:micronaut-inject"
     kapt "io.micronaut:micronaut-inject-java"
 
+    // Security
     implementation "io.micronaut:micronaut-security-jwt"
     kapt "io.micronaut:micronaut-security"
 
+    // Bean validation
     implementation("io.micronaut:micronaut-validation")
     kapt "io.micronaut:micronaut-validation"
 
+    // Logs
     runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
     runtimeOnly "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
 
+    // Graal VM support
+    compileOnly "org.graalvm.nativeimage:svm"
+    kapt "io.micronaut:micronaut-graal"
+    
+    // AWS native image support
+    implementation("io.micronaut.aws:micronaut-function-aws-custom-runtime") {
+        exclude group: "com.fasterxml.jackson.module", module: "jackson-module-afterburner"
+    }
+    implementation("io.micronaut.aws:micronaut-function-aws-api-proxy") {
+        exclude group: "com.fasterxml.jackson.module", module: "jackson-module-afterburner"
+    }
+
+    // Testing
     kaptTest platform("io.micronaut:micronaut-bom:$micronautVersion")
     kaptTest "io.micronaut:micronaut-inject-java"
     testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
@@ -88,4 +104,8 @@ shadowJar {
 tasks.withType(JavaExec) {
     classpath += configurations.developmentOnly
     jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
+}
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+    options.compilerArgs.add('-parameters')
 }

@@ -2,7 +2,7 @@
 
 DOCKER_IMAGE_NAME=graalvm
 EXECUTABLE_NAME=serverbin
-MAIN_CLASS=com.ivarprudnikov.auth0.Application
+MAIN_CLASS=io.micronaut.function.aws.runtime.MicronautLambdaRuntime
 APP_JAR=build/libs/auth0-micronaut-template-1.0-all.jar
 
 ./gradlew clean build --info
@@ -18,6 +18,7 @@ fi
 docker run --rm -it -v $(pwd):/func ${DOCKER_IMAGE_NAME} \
   -H:+TraceClassInitialization \
   -H:+ReportExceptionStackTraces \
+  -H:-AllowVMInspection \
   -H:Name=${EXECUTABLE_NAME} \
   -H:Class=${MAIN_CLASS} \
   -H:IncludeResources=logback.xml\|application.yml \
