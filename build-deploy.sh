@@ -11,5 +11,5 @@ fi
 sam package --output-template-file packaged.yaml --s3-bucket ${BUCKET_NAME}
 
 sam deploy --template-file packaged.yaml \
-        --stack-name auth0-micronaut-template \
+        --stack-name auth0-micronaut-graal-template \
         --capabilities CAPABILITY_IAM
