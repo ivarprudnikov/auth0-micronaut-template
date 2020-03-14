@@ -19,13 +19,7 @@ script: bash build-jar-to-bin.sh
 deploy:
 - provider: script
   skip_cleanup: true
-  script: LAMBDA_S3_BUCKET_NAME=auth0-micronaut-template bash build-deploy.sh
+  script: LAMBDA_APP_NAME=auth0-micronaut-graal-template bash build-deploy.sh
   on:
     branch: master
-    condition: "$TRAVIS_PULL_REQUEST = false"
-- provider: script
-  skip_cleanup: true
-  script: LAMBDA_S3_BUCKET_NAME=auth0-micronaut-gaal-template bash build-deploy.sh
-  on:
-    branch: graalvm-native-image
     condition: "$TRAVIS_PULL_REQUEST = false"
