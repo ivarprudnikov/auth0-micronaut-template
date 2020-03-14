@@ -5,7 +5,7 @@ Auth0 Micronaut template
 
 ## Live
 
-App is deployed to AWS Lambda: https://waucv5jon6.execute-api.eu-west-1.amazonaws.com/Prod/ 
+App is deployed to AWS Lambda: https://995oz2jt04.execute-api.eu-west-1.amazonaws.com/Prod/
 
 ## About
 
@@ -40,7 +40,10 @@ UP%
 This requires Docker to be running locally and `sam` CLI installed.
 
 ```shell script
-sam local start-api
+./build-sam-local.sh
+
+....
+
 Mounting ExampleFunction at http://127.0.0.1:3000/ [DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT]
 Mounting ExampleFunction at http://127.0.0.1:3000/{proxy+} [DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT]
 You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. You only need to restart SAM CLI if you update your AWS SAM template
@@ -66,13 +69,36 @@ Example micronaut implementations using Graal VM (native binaries):
     ./gradlew build
     ```
 
-2. Create `S3 bucket` where application version is going to be uploaded before deployed to Cloudformation:
+2. Convert jar to native binary image to reduce cold startup times.
+
+    - First build a docker image that contains GraalVM `native-image` installed:
+
+    ```shell script
+    docker build . -t MY_IMAGE_TAG
+    ```
+
+    - Convert jar file to native image:
+
+    ```shell script
+    docker run --rm -it -v $(pwd):/func MY_IMAGE_TAG \
+      -H:+TraceClassInitialization \
+      -H:+ReportExceptionStackTraces \
+      -H:-AllowVMInspection \
+      -H:Name=serverbin \
+      -H:Class=io.micronaut.function.aws.runtime.MicronautLambdaRuntime \
+      -H:IncludeResources=logback.xml\|application.yml \
+      --no-server \
+      --no-fallback \
+      -cp build/libs/auth0-micronaut-template-1.0-all.jar
+    ```
+
+3. Create `S3 bucket` where application version is going to be uploaded before deployed to Cloudformation:
 
     ```shell script
     aws s3 mb s3://BUCKET_NAME
     ```
 
-3. Package Lambda (uploads to S3):
+4. Package Lambda (uploads to S3):
 
     ```shell script
     sam package \
@@ -80,20 +106,20 @@ Example micronaut implementations using Graal VM (native binaries):
         --s3-bucket BUCKET_NAME
     ```
 
-4. Create Cloudformation Stack and deploy your SAM resources.
+5. Create Cloudformation Stack and deploy your SAM resources.
 
     ```shell script
     sam deploy \
         --template-file packaged.yaml \
-        --stack-name auth0-micronaut-template \
+        --stack-name STACK_NAME \
         --capabilities CAPABILITY_IAM
     ```
 
-5. After deployment is complete you can run the following command to retrieve the API Gateway Endpoint URL:
+6. After deployment is complete you can run the following command to retrieve the API Gateway Endpoint URL:
 
     ```shell script
     aws cloudformation describe-stacks \
-        --stack-name auth0-micronaut-template \
+        --stack-name STACK_NAME \
         --query 'Stacks[].Outputs[?OutputKey==`ApiUrl`]' \
         --output table
     ```
@@ -103,7 +129,7 @@ Example micronaut implementations using Graal VM (native binaries):
 Below `sam validate` requires AWS Credentials to be set up.
 
 ```shell script
-sam validate && LAMBDA_S3_BUCKET_NAME=auth0-micronaut-template ./deploy
+sam validate && LAMBDA_APP_NAME=auth0-micronaut-graal-template bash build-deploy.sh
 ```
 
 ### Cloudformation cleanup
@@ -111,5 +137,5 @@ sam validate && LAMBDA_S3_BUCKET_NAME=auth0-micronaut-template ./deploy
 In order to delete our Serverless Application recently deployed you can use the following AWS CLI Command:
 
 ```shell script
-aws cloudformation delete-stack --stack-name auth0-micronaut-template
+aws cloudformation delete-stack --stack-name STACK_NAME
 ```
