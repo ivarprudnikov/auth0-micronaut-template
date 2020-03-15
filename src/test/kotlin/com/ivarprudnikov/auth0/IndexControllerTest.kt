@@ -16,6 +16,7 @@ import io.micronaut.test.annotation.MockBean
 import io.micronaut.test.extensions.kotlintest.MicronautKotlinTestExtension.getMock
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import org.reactivestreams.Publisher
 
 @MicronautTest
@@ -37,13 +38,15 @@ class IndexControllerTest(@Client("/") client: RxHttpClient, tokenValidator: Tok
     "me path authenticates and responds with 200" {
 
         val mock = getMock(tokenValidator)
-        every { mock.validateToken(any()) } answers {
+        every { mock.validateToken("foobar") } answers {
             Publisher { s -> s.onNext(DefaultAuthentication("user", emptyMap())) }
         }
 
         val response: HttpResponse<String> = client.toBlocking().exchange(HttpRequest.GET<String>("/me").bearerAuth("foobar"), String::class.java)
         response.status shouldBe HttpStatus.OK
         response.body() shouldBe """{"name":"user"}"""
+
+        verify { mock.validateToken("foobar") }
     }
 }) {
     @MockBean(TokenValidator::class)
