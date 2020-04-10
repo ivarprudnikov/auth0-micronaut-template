@@ -1,17 +1,16 @@
 package com.ivarprudnikov.auth0
 
+import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
-import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Produces
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.authentication.Authentication
 import io.micronaut.security.rules.SecurityRule
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import javax.annotation.security.PermitAll
 
-@PermitAll
+@Secured(SecurityRule.IS_ANONYMOUS)
 @Controller("/")
 class IndexController {
 
