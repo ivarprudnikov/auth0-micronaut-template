@@ -47,7 +47,7 @@ dependencies {
 
     // Logs
     runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
-    runtimeOnly "com.fasterxml.jackson.module:jackson-module-kotlin:2.10.3"
+    runtimeOnly "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0"
 
     // Graal VM support
     compileOnly "org.graalvm.nativeimage:svm"
