@@ -5,7 +5,12 @@ Auth0 Micronaut template
 
 ## Live
 
-App is deployed to AWS Lambda: https://995oz2jt04.execute-api.eu-west-1.amazonaws.com/Prod/
+App is deployed to AWS Lambda
+
+|      | JAR with StreamLambdaHandler | Graal VM native binary with custom runtime |
+| ---- | ---------------------------- | ------------------------------------------ |
+| Branch | `master`                     | `aws-lambda-graalvm`                       |
+| URL | https://te60oj36jd.execute-api.eu-west-1.amazonaws.com/Prod/ | https://995oz2jt04.execute-api.eu-west-1.amazonaws.com/Prod/ |
 
 ## About
 
