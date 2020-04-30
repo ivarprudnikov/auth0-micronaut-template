@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer
+
 plugins {
     id "org.jetbrains.kotlin.jvm" version "$kotlinVersion"
     id "org.jetbrains.kotlin.kapt" version "$kotlinVersion"
@@ -46,19 +48,15 @@ dependencies {
     kapt "io.micronaut:micronaut-validation"
 
     // Logs
-    runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
+    runtimeOnly "org.apache.logging.log4j:log4j-slf4j-impl:2.12.1"
+    runtimeOnly "com.amazonaws:aws-lambda-java-log4j2:1.1.0"
+
     runtimeOnly "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0"
 
-    // Graal VM support
-    compileOnly "org.graalvm.nativeimage:svm"
-    kapt "io.micronaut:micronaut-graal"
-
-    // AWS native image support
-    implementation("io.micronaut.aws:micronaut-function-aws-custom-runtime") {
-        exclude group: "com.fasterxml.jackson.module", module: "jackson-module-afterburner"
-    }
-    implementation("io.micronaut.aws:micronaut-function-aws-api-proxy") {
-        exclude group: "com.fasterxml.jackson.module", module: "jackson-module-afterburner"
+    // AWS proxy integration
+    implementation('io.micronaut.aws:micronaut-function-aws-api-proxy:1.4.1') {
+        exclude group: "org.apache.httpcomponents"
+        exclude group: "org.slf4j"
     }
 
     // Testing
@@ -99,6 +97,7 @@ compileTestKotlin {
 
 shadowJar {
     mergeServiceFiles()
+    transform(Log4j2PluginsCacheFileTransformer)
 }
 
 tasks.withType(JavaExec) {

@@ -1,5 +1,0 @@
-#!/bin/sh
-set -euo pipefail
-# https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html
-cd $LAMBDA_TASK_ROOT
-./serverbin -Djava.library.path=$(pwd)

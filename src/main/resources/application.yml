@@ -4,7 +4,6 @@ micronaut:
   server:
     cors:
       enabled: true
-      single-header: true
   security:
     enabled: true
     ip-patterns: []

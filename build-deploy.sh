@@ -2,8 +2,6 @@
 
 NAME="${LAMBDA_APP_NAME:?Unique app name required}"
 
-./build-function-zip.sh
-
 # Create S3 bucket used for deployment if one does not yet exist
 if aws s3 ls s3://${NAME} 2>&1 | grep -q 'NoSuchBucket'; then
     aws s3 mb s3://${NAME}

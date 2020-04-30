@@ -25,7 +25,7 @@ JWT config (by using JWKS) is visible in [application.yml](/src/main/resources/a
 Start [Micronaut server](https://docs.micronaut.io/latest/guide/index.html#creatingServer)
 
 ```shell script
-./geadlew run
+./gradlew run
 ```
 
 Then to check status
@@ -37,17 +37,18 @@ UP%
 
 ### Running with SAM
 
-This requires Docker to be running locally and `sam` CLI installed.
+This requires Docker to be running locally and `sam` CLI installed. 
+https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-local-start-api.html
 
 ```shell script
-./build-sam-local.sh
+sam local start-api --template template.yaml --port 8080
 
 ....
 
-Mounting ExampleFunction at http://127.0.0.1:3000/ [DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT]
-Mounting ExampleFunction at http://127.0.0.1:3000/{proxy+} [DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT]
+Mounting ExampleFunction at http://127.0.0.1:8080/ [DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT]
+Mounting ExampleFunction at http://127.0.0.1:8080/{proxy+} [DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT]
 You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. You only need to restart SAM CLI if you update your AWS SAM template
-2020-03-02 22:16:20  * Running on http://127.0.0.1:3000/ (Press CTRL+C to quit)
+2020-03-02 22:16:20  * Running on http://127.0.0.1:8080/ (Press CTRL+C to quit)
 ```
 
 ## Packaging and deployment
@@ -66,39 +67,16 @@ Example micronaut implementations using Graal VM (native binaries):
 1. Build jar
 
     ```shell script
-    ./gradlew build
+    ./gradlew clean build --info
     ```
 
-2. Convert jar to native binary image to reduce cold startup times.
-
-    - First build a docker image that contains GraalVM `native-image` installed:
-
-    ```shell script
-    docker build . -t MY_IMAGE_TAG
-    ```
-
-    - Convert jar file to native image:
-
-    ```shell script
-    docker run --rm -it -v $(pwd):/func MY_IMAGE_TAG \
-      -H:+TraceClassInitialization \
-      -H:+ReportExceptionStackTraces \
-      -H:-AllowVMInspection \
-      -H:Name=serverbin \
-      -H:Class=io.micronaut.function.aws.runtime.MicronautLambdaRuntime \
-      -H:IncludeResources=logback.xml\|application.yml \
-      --no-server \
-      --no-fallback \
-      -cp build/libs/auth0-micronaut-template-1.0-all.jar
-    ```
-
-3. Create `S3 bucket` where application version is going to be uploaded before deployed to Cloudformation:
+2. Create `S3 bucket` where application version is going to be uploaded before deployed to Cloudformation:
 
     ```shell script
     aws s3 mb s3://BUCKET_NAME
     ```
 
-4. Package Lambda (uploads to S3):
+3. Package Lambda (uploads to S3):
 
     ```shell script
     sam package \
@@ -106,7 +84,7 @@ Example micronaut implementations using Graal VM (native binaries):
         --s3-bucket BUCKET_NAME
     ```
 
-5. Create Cloudformation Stack and deploy your SAM resources.
+4. Create Cloudformation Stack and deploy your SAM resources.
 
     ```shell script
     sam deploy \
@@ -115,7 +93,7 @@ Example micronaut implementations using Graal VM (native binaries):
         --capabilities CAPABILITY_IAM
     ```
 
-6. After deployment is complete you can run the following command to retrieve the API Gateway Endpoint URL:
+5. After deployment is complete you can run the following command to retrieve the API Gateway Endpoint URL:
 
     ```shell script
     aws cloudformation describe-stacks \

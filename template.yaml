@@ -1,23 +1,24 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Micronaut GraalVM server utilizing proxy requests through API Gateway
+Description: Micronaut server utilizing proxy requests through API Gateway
 # SAM spec: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md
 # SAM is CF, therefore Cloud Formation spec: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 # SAM Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
+  Function:
+    Runtime: java8
+    Timeout: 20
+    MemorySize: 1024
   Api:
     EndpointConfiguration: EDGE
 Resources:
   MainFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: auth0-micronaut-graal-template-server
-      Handler: not.used.in.provided.runtime
-      Runtime: provided
-      CodeUri: function.zip
-      Description: Micronaut server converted to binary
-      MemorySize: 1024
-      Timeout: 20
+      FunctionName: auth0-micronaut-template-server
+      Description: Micronaut server running behing StreamLambdaHandler
+      CodeUri: build/libs/auth0-micronaut-template-1.0-all.jar
+      Handler: com.ivarprudnikov.auth0.StreamLambdaHandler::handleRequest
       Events:
         # hardcoded root / endpoint, otherwise locally does not respond
         RootEndpoint:
