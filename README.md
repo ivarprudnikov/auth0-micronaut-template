@@ -1,11 +1,13 @@
 Auth0 Micronaut template
 ======================== 
 
-[![Build Status](https://travis-ci.com/ivarprudnikov/auth0-micronaut-template.svg?branch=master)](https://travis-ci.com/ivarprudnikov/auth0-micronaut-template)
+[![Build Status](https://travis-ci.com/ivarprudnikov/auth0-micronaut-template.svg?branch=master)](https://travis-ci.com/ivarprudnikov/auth0-micronaut-template) 
+[![GitHub issues](https://img.shields.io/github/issues/ivarprudnikov/auth0-micronaut-template.svg)](https://github.com/ivarprudnikov/auth0-micronaut-template/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/ivarprudnikov/auth0-micronaut-template.svg)](https://github.com/ivarprudnikov/auth0-micronaut-template/commits/master)
 
 ## Live
 
-App is deployed to AWS Lambda
+App is deployed to AWS Lambda:
 
 |      | JAR with StreamLambdaHandler | Graal VM native binary with custom runtime |
 | ---- | ---------------------------- | ------------------------------------------ |
@@ -17,6 +19,8 @@ App is deployed to AWS Lambda
 Example should serve as a template when necessary to write a small service which uses JWT tokens signed by Auth0 server.
 
 JWT config (by using JWKS) is visible in [application.yml](/src/main/resources/application.yml#L7). Controller endpoint then uses [`@Secured` annotation](src/main/kotlin/com/ivarprudnikov/auth0/IndexController.kt#L29).
+
+Client application using this API: https://github.com/ivarprudnikov/react-auth0-template
 
 ### API endpoints
 
