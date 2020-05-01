@@ -8,9 +8,12 @@
         </Lambda>
     </Appenders>
     <Loggers>
-        <Root level="INFO">
+        <!-- https://logging.apache.org/log4j/2.x/manual/configuration.html -->
+        <Root level="info">
             <AppenderRef ref="Lambda"/>
         </Root>
-        <Logger name="com.ivarprudnikov.auth0" level="DEBUG" />
+        <Logger name="com.ivarprudnikov.auth0" level="debug" additivity="false">
+            <AppenderRef ref="Lambda"/>
+        </Logger>
     </Loggers>
 </Configuration>

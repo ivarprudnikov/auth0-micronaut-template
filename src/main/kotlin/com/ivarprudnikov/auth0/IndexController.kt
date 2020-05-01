@@ -19,7 +19,7 @@ class IndexController {
     @Get("/")
     @Produces(MediaType.TEXT_PLAIN)
     fun index(): String {
-        logger.debug("status check")
+        logger.debug("path '/' status check")
         return "UP"
     }
 
@@ -27,7 +27,7 @@ class IndexController {
     @Produces(MediaType.APPLICATION_JSON)
     @Secured(SecurityRule.IS_AUTHENTICATED)
     fun me(authentication: Authentication?): Authentication? {
-        logger.debug("authentication check")
+        logger.debug("path '/me' authentication check")
         return authentication
     }
 }
