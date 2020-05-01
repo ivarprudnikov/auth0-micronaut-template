@@ -1,0 +1,48 @@
+{
+  "body": "{}",
+  "resource": "/{proxy+}",
+  "path": "/me",
+  "httpMethod": "OPTIONS",
+  "queryStringParameters": {},
+  "pathParameters": {
+    "proxy": "me"
+  },
+  "stageVariables": {},
+  "headers": {
+    "Host": "te60oj36jd.execute-api.eu-west-1.amazonaws.com",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:75.0) Gecko/20100101 Firefox/75.0",
+    "Accept": "*/*",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Access-Control-Request-Method": "GET",
+    "Access-Control-Request-Headers": "authorization",
+    "Referer": "https://ivarprudnikov.github.io/react-auth0-template/profile",
+    "Origin": "https://ivarprudnikov.github.io",
+    "Connection": "keep-alive",
+    "Pragma": "no-cache",
+    "Cache-Control": "no-cache",
+    "TE": "Trailers"
+  },
+  "requestContext": {
+    "accountId": "123456789012",
+    "resourceId": "123456",
+    "stage": "prod",
+    "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "accountId": null,
+      "cognitoIdentityId": null,
+      "caller": null,
+      "apiKey": null,
+      "sourceIp": "127.0.0.1",
+      "cognitoAuthenticationType": null,
+      "cognitoAuthenticationProvider": null,
+      "userArn": null,
+      "userAgent": "Custom User Agent String",
+      "user": null
+    },
+    "resourcePath": "/{proxy+}",
+    "httpMethod": "OPTIONS",
+    "apiId": "1234567890"
+  }
+}

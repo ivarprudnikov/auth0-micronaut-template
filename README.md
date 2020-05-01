@@ -3,7 +3,7 @@ Auth0 Micronaut template
 
 [![Build Status](https://travis-ci.com/ivarprudnikov/auth0-micronaut-template.svg?branch=master)](https://travis-ci.com/ivarprudnikov/auth0-micronaut-template) 
 [![GitHub issues](https://img.shields.io/github/issues/ivarprudnikov/auth0-micronaut-template.svg)](https://github.com/ivarprudnikov/auth0-micronaut-template/issues)
-[![GitHub last commit](https://img.shields.io/github/last-commit/ivarprudnikov/auth0-micronaut-template.svg)](https://github.com/ivarprudnikov/auth0-micronaut-template/commits/master)
+[![GitHub last commit](https://img.shields.io/github/last-commit/ivarprudnikov/auth0-micronaut-template.svg)](https://github.com/ivarprudnikov/auth0-micronaut-template /commits/master)
 
 ## Live
 
@@ -58,6 +58,14 @@ Mounting ExampleFunction at http://127.0.0.1:8080/ [DELETE, GET, HEAD, OPTIONS, 
 Mounting ExampleFunction at http://127.0.0.1:8080/{proxy+} [DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT]
 You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. You only need to restart SAM CLI if you update your AWS SAM template
 2020-03-02 22:16:20  * Running on http://127.0.0.1:8080/ (Press CTRL+C to quit)
+```
+
+### Invoking function with events
+
+Instead of running the application and then trying to invoke API in the browser you could
+just invoke Lambda function with pre-built events:
+```
+sam local invoke --template template.yaml --event aws-test-events/options-me.json --skip-pull-image
 ```
 
 ## Packaging and deployment
