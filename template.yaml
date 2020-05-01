@@ -11,6 +11,10 @@ Globals:
     MemorySize: 1024
   Api:
     EndpointConfiguration: EDGE
+    # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#cors-configuration
+    Cors:
+      AllowOrigin: "'*'"
+      AllowCredentials: true
 Resources:
   MainFunction:
     Type: AWS::Serverless::Function
