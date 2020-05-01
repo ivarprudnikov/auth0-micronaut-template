@@ -16,7 +16,7 @@ class IndexController {
 
     var logger: Logger = LoggerFactory.getLogger(IndexController::class.java)
 
-    @Get("/")
+    @Get
     @Produces(MediaType.TEXT_PLAIN)
     fun index(): String {
         logger.debug("path '/' status check")

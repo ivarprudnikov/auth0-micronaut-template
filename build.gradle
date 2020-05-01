@@ -55,7 +55,6 @@ dependencies {
 
     // AWS proxy integration
     implementation('io.micronaut.aws:micronaut-function-aws-api-proxy:1.4.1') {
-        exclude group: "org.apache.httpcomponents"
         exclude group: "org.slf4j"
     }
 
