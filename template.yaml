@@ -13,7 +13,7 @@ Globals:
     EndpointConfiguration: EDGE
     # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#cors-configuration
     Cors:
-      AllowOrigin: "'ivarprudnikov.github.io'"
+      AllowOrigin: "'https://ivarprudnikov.github.io'"
       AllowCredentials: true
 
 Resources:
