@@ -14,7 +14,12 @@ App is deployed to AWS Lambda:
 | Branch | `master`                     | `aws-lambda-graalvm`                       |
 | URL | https://te60oj36jd.execute-api.eu-west-1.amazonaws.com/Prod/ | https://995oz2jt04.execute-api.eu-west-1.amazonaws.com/Prod/ |
 
-Client application using this API: https://github.com/ivarprudnikov/react-auth0-template
+Client application using this API: 
+
+| Website URL | Github repository |
+| ---------------------------- | ------------------------------------------ |
+| https://ivarprudnikov.github.io/react-auth0-template/ | https://github.com/ivarprudnikov/react-auth0-template |
+
 
 ## About
 
