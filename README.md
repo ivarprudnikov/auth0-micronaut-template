@@ -14,13 +14,13 @@ App is deployed to AWS Lambda:
 | Branch | `master`                     | `aws-lambda-graalvm`                       |
 | URL | https://te60oj36jd.execute-api.eu-west-1.amazonaws.com/Prod/ | https://995oz2jt04.execute-api.eu-west-1.amazonaws.com/Prod/ |
 
+Client application using this API: https://github.com/ivarprudnikov/react-auth0-template
+
 ## About
 
 Example should serve as a template when necessary to write a small service which uses JWT tokens signed by Auth0 server.
 
 JWT config (by using JWKS) is visible in [application.yml](/src/main/resources/application.yml#L7). Controller endpoint then uses [`@Secured` annotation](src/main/kotlin/com/ivarprudnikov/auth0/IndexController.kt#L29).
-
-Client application using this API: https://github.com/ivarprudnikov/react-auth0-template
 
 ### API endpoints
 
@@ -124,7 +124,7 @@ Example micronaut implementations using Graal VM (native binaries):
 Below `sam validate` requires AWS Credentials to be set up.
 
 ```shell script
-sam validate && LAMBDA_APP_NAME=auth0-micronaut-graal-template bash build-deploy.sh
+sam validate && LAMBDA_APP_NAME=auth0-micronaut-template bash build-deploy.sh
 ```
 
 ### Cloudformation cleanup
