@@ -25,6 +25,8 @@ Client application using this API:
 
 Example should serve as a template when necessary to write a small service which uses JWT tokens signed by Auth0 server.
 
+Blog post explaining implementation - [ivarprudnikov.com/micronaut-kotlin-jwt-secured-api-aws-lambda](https://www.ivarprudnikov.com/micronaut-kotlin-jwt-secured-api-aws-lambda/)
+
 JWT config (by using JWKS) is visible in [application.yml](/src/main/resources/application.yml#L7). Controller endpoint then uses [`@Secured` annotation](src/main/kotlin/com/ivarprudnikov/auth0/IndexController.kt#L29).
 
 ### API endpoints
