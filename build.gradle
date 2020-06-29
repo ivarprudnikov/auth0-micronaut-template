@@ -54,7 +54,7 @@ dependencies {
     runtimeOnly "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0"
 
     // AWS proxy integration
-    implementation('io.micronaut.aws:micronaut-function-aws-api-proxy:1.4.1') {
+    implementation('io.micronaut.aws:micronaut-function-aws-api-proxy:2.0.0') {
         exclude group: "org.slf4j"
     }
 
