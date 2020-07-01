@@ -2,8 +2,8 @@ package com.ivarprudnikov.auth0
 
 import com.amazonaws.serverless.proxy.internal.testutils.AwsProxyRequestBuilder
 import com.amazonaws.serverless.proxy.internal.testutils.MockLambdaContext
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 import io.micronaut.context.ApplicationContext
 import io.micronaut.function.aws.proxy.MicronautLambdaContainerHandler
 import io.micronaut.http.HttpStatus
