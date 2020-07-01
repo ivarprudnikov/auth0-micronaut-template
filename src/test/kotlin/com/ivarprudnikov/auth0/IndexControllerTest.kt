@@ -1,8 +1,8 @@
 package com.ivarprudnikov.auth0
 
-import io.kotlintest.shouldBe
-import io.kotlintest.shouldThrow
-import io.kotlintest.specs.StringSpec
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
@@ -13,14 +13,17 @@ import io.micronaut.security.authentication.DefaultAuthentication
 import io.micronaut.security.token.validator.TokenValidator
 import io.micronaut.test.annotation.MicronautTest
 import io.micronaut.test.annotation.MockBean
-import io.micronaut.test.extensions.kotlintest.MicronautKotlinTestExtension.getMock
+import io.micronaut.test.extensions.kotest.MicronautKotestExtension.getMock
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.reactivestreams.Publisher
+import io.reactivex.Flowable
 
 @MicronautTest
-class IndexControllerTest(@Client("/") client: RxHttpClient, tokenValidator: TokenValidator) : StringSpec({
+class IndexControllerTest(
+        @Client("/") private val client: RxHttpClient,
+        private val tokenValidator: TokenValidator
+) : StringSpec({
 
     "root path responds with text" {
         val response: HttpResponse<String> = client.toBlocking().exchange(HttpRequest.GET<String>("/"), String::class.java)
@@ -38,9 +41,9 @@ class IndexControllerTest(@Client("/") client: RxHttpClient, tokenValidator: Tok
     "me path authenticates and responds with 200" {
 
         val mock = getMock(tokenValidator)
-        every { mock.validateToken("foobar") } answers {
-            Publisher { s -> s.onNext(DefaultAuthentication("user", emptyMap())) }
-        }
+        every { mock.validateToken(any()) } returns (Flowable.just(
+            DefaultAuthentication("user", emptyMap())
+        ))
 
         val response: HttpResponse<String> = client.toBlocking().exchange(HttpRequest.GET<String>("/me").bearerAuth("foobar"), String::class.java)
         response.status shouldBe HttpStatus.OK
