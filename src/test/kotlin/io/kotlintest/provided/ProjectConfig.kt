@@ -1,7 +1,8 @@
 package io.kotlintest.provided
 
-import io.kotlintest.AbstractProjectConfig
-import io.micronaut.test.extensions.kotlintest.MicronautKotlinTestExtension
+import io.kotest.core.config.AbstractProjectConfig
+import io.micronaut.test.extensions.kotest.MicronautKotestExtension
+
 
 /**
  * Before you can get started writing tests with KotlinTest,
@@ -11,6 +12,6 @@ import io.micronaut.test.extensions.kotlintest.MicronautKotlinTestExtension
  * https://github.com/micronaut-projects/micronaut-test/blob/master/src/main/docs/guide/kotlintest.adoc#before-you-begin
  */
 object ProjectConfig : AbstractProjectConfig() {
-    override fun listeners() = listOf(MicronautKotlinTestExtension)
-    override fun extensions() = listOf(MicronautKotlinTestExtension)
+    override fun listeners() = listOf(MicronautKotestExtension)
+    override fun extensions() = listOf(MicronautKotestExtension)
 }
