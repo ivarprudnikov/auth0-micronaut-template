@@ -1,8 +1,7 @@
-package io.kotlintest.provided
+package com.ivarprudnikov.auth0
 
 import io.kotest.core.config.AbstractProjectConfig
 import io.micronaut.test.extensions.kotest.MicronautKotestExtension
-
 
 /**
  * Before you can get started writing tests with KotlinTest,
