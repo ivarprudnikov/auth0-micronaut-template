@@ -3,7 +3,7 @@ import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCach
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.4.0"
     id "org.jetbrains.kotlin.kapt" version "1.4.0"
-    id "org.jetbrains.kotlin.plugin.allopen" version "1.4.0"
+    id "org.jetbrains.kotlin.plugin.allopen" version "1.4.10"
     id "com.github.johnrengelman.shadow" version "6.0.0"
     id "net.ltgt.apt-idea" version "0.21"
     id "application"
