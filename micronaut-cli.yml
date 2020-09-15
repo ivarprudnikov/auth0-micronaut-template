@@ -3,4 +3,4 @@ defaultPackage: com.ivarprudnikov.auth0
 testFramework: kotest
 sourceLanguage: kotlin
 buildTool: gradle
-features: [annotation-api, app-name, docker, file-watch, gradle, http-client, junit, kotlin, kotlin-application, netty-server, readme, shade, yaml]
+features: [annotation-api, app-name, aws-lambda, docker, file-watch, gradle, kotlin, kotlin-application, log4j2, readme, security-annotations, security-jwt, http-client, junit, netty-server, shade, yaml]

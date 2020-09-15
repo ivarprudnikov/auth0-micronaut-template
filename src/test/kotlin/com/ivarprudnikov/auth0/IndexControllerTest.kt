@@ -1,8 +1,5 @@
 package com.ivarprudnikov.auth0
 
-import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.shouldBe
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
@@ -13,46 +10,61 @@ import io.micronaut.security.authentication.DefaultAuthentication
 import io.micronaut.security.token.validator.TokenValidator
 import io.micronaut.test.annotation.MicronautTest
 import io.micronaut.test.annotation.MockBean
-import io.micronaut.test.extensions.kotest.MicronautKotestExtension.getMock
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
 import io.reactivex.Flowable
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.api.assertThrows
+import org.mockito.Mockito.*
+import javax.inject.Inject
 
 @MicronautTest
-class IndexControllerTest(
-        @Client("/") private val client: RxHttpClient,
-        private val tokenValidator: TokenValidator
-) : StringSpec({
+class IndexControllerTest {
 
-    "root path responds with text" {
-        val response: HttpResponse<String> = client.toBlocking().exchange(HttpRequest.GET<String>("/"), String::class.java)
-        response.status shouldBe HttpStatus.OK
-        response.body() shouldBe "UP"
+    @field:Inject
+    @field:Client("/")
+    lateinit var client: RxHttpClient
+
+    @field:Inject
+    lateinit var tokenValidator: TokenValidator
+
+    @MockBean(TokenValidator::class)
+    fun tokenValidator(): TokenValidator {
+        return mock(TokenValidator::class.java)
     }
 
-    "me path responds with 401" {
-        val e = shouldThrow<HttpClientResponseException> {
+    @Test
+    fun root_path_responds_with_text() {
+        val response: HttpResponse<String> = client.toBlocking().exchange(HttpRequest.GET<String>("/"), String::class.java)
+        assertEquals(response.status, HttpStatus.OK)
+        assertEquals(response.body(), "UP")
+    }
+
+    @Test
+    fun me_path_responds_with_401() {
+        val e = assertThrows<HttpClientResponseException> {
             client.toBlocking().exchange(HttpRequest.GET<String>("/me"), String::class.java)
         }
-        e.status shouldBe HttpStatus.UNAUTHORIZED
+
+        assertEquals(e.status, HttpStatus.UNAUTHORIZED)
     }
 
-    "me path authenticates and responds with 200" {
+    @Test
+    fun me_path_authenticates_and_responds_with_200() {
 
-        val mock = getMock(tokenValidator)
-        every { mock.validateToken(any()) } returns (Flowable.just(
-            DefaultAuthentication("user", emptyMap())
+        `when`(tokenValidator.validateToken(any())).thenReturn(Flowable.just(
+                DefaultAuthentication("user", emptyMap())
         ))
 
-        val response: HttpResponse<String> = client.toBlocking().exchange(HttpRequest.GET<String>("/me").bearerAuth("foobar"), String::class.java)
-        response.status shouldBe HttpStatus.OK
-        response.body() shouldBe """{"name":"user"}"""
+        val response: HttpResponse<String> = assertDoesNotThrow { client.toBlocking().exchange(HttpRequest.GET<String>("/me").bearerAuth("foobar"), String::class.java) }
 
-        verify { mock.validateToken("foobar") }
+        assertEquals(response.body(), """{"name":"user"}""")
+
+        verify(tokenValidator, atLeastOnce()).validateToken(any())
     }
 
-    "me path OPTIONS request responds" {
+    @Test
+    fun me_path_OPTIONS_request_responds() {
         val response: HttpResponse<String> = client.toBlocking().exchange(
                 HttpRequest.OPTIONS<String>("/me").headers(mutableMapOf<CharSequence, CharSequence>(
                         "Host" to "te60oj36jd.execute-api.eu-west-1.amazonaws.com",
@@ -69,12 +81,7 @@ class IndexControllerTest(
                         "Cache-Control" to "no-cache",
                         "TE" to "Trailers"
                 )), String::class.java)
-        response.status shouldBe HttpStatus.OK
-        response.body() shouldBe null
-    }
-}) {
-    @MockBean(TokenValidator::class)
-    fun tokenValidator(): TokenValidator {
-        return mockk()
+        assertEquals(response.status, HttpStatus.OK)
+        assertEquals(response.body(), null)
     }
 }
