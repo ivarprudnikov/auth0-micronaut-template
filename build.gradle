@@ -59,7 +59,7 @@ dependencies {
     runtimeOnly "com.fasterxml.jackson.module:jackson-module-kotlin"
 
     // AWS proxy integration
-    implementation('io.micronaut.aws:micronaut-function-aws-api-proxy:1.4.1') {
+    implementation('io.micronaut.aws:micronaut-function-aws-api-proxy:2.1.0.RC2') {
         exclude group: "org.slf4j"
     }
 
@@ -67,7 +67,7 @@ dependencies {
     kaptTest platform("io.micronaut:micronaut-bom:2.0.1")
     kaptTest "io.micronaut:micronaut-inject-java"
     testImplementation enforcedPlatform("io.micronaut:micronaut-bom:2.0.1")
-    testImplementation "io.micronaut.test:micronaut-test-kotest:1.2.2"
+    testImplementation "io.micronaut.test:micronaut-test-kotest:1.2.3"
     testImplementation "io.mockk:mockk:1.10.0"
     testImplementation "io.kotest:kotest-runner-junit5-jvm:4.2.0"
 }
