@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test
 @MicronautTest
 class AWSProxyTest {
 
-    // TODO it is not what I would expect when cors is enabled
     @Test
     fun proxy_OPTIONS_request_to_root_returns_ok() {
         val handler = MicronautLambdaContainerHandler(

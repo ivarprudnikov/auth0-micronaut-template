@@ -1,6 +1,6 @@
 applicationType: default
 defaultPackage: com.ivarprudnikov.auth0
-testFramework: kotest
+testFramework: junit
 sourceLanguage: kotlin
 buildTool: gradle
 features: [annotation-api, app-name, aws-lambda, docker, file-watch, gradle, kotlin, kotlin-application, log4j2, readme, security-annotations, security-jwt, http-client, junit, netty-server, shade, yaml]

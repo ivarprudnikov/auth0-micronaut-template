@@ -7,6 +7,7 @@ import io.micronaut.http.client.RxHttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.security.authentication.DefaultAuthentication
+import io.micronaut.security.token.jwt.validator.JwtTokenValidator
 import io.micronaut.security.token.validator.TokenValidator
 import io.micronaut.test.annotation.MicronautTest
 import io.micronaut.test.annotation.MockBean
@@ -29,8 +30,8 @@ class IndexControllerTest {
     lateinit var tokenValidator: TokenValidator
 
     @MockBean(TokenValidator::class)
-    fun tokenValidator(): TokenValidator {
-        return mock(TokenValidator::class.java)
+    fun tokenValidator(): JwtTokenValidator {
+        return mock(JwtTokenValidator::class.java)
     }
 
     @Test
