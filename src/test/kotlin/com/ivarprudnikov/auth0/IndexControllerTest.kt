@@ -1,13 +1,10 @@
 package com.ivarprudnikov.auth0
 
-import io.micronaut.http.HttpRequest
-import io.micronaut.http.HttpResponse
-import io.micronaut.http.HttpStatus
+import io.micronaut.http.*
 import io.micronaut.http.client.RxHttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.security.authentication.DefaultAuthentication
-import io.micronaut.security.token.jwt.validator.JwtTokenValidator
 import io.micronaut.security.token.validator.TokenValidator
 import io.micronaut.test.annotation.MicronautTest
 import io.micronaut.test.annotation.MockBean
@@ -30,8 +27,8 @@ class IndexControllerTest {
     lateinit var tokenValidator: TokenValidator
 
     @MockBean(TokenValidator::class)
-    fun tokenValidator(): JwtTokenValidator {
-        return mock(JwtTokenValidator::class.java)
+    fun tokenValidator(): TokenValidator {
+        return mock(TokenValidator::class.java)
     }
 
     @Test
@@ -53,15 +50,15 @@ class IndexControllerTest {
     @Test
     fun me_path_authenticates_and_responds_with_200() {
 
-        `when`(tokenValidator.validateToken(any())).thenReturn(Flowable.just(
+        `when`(tokenValidator.validateToken(eq("token"), any())).thenReturn(Flowable.just(
                 DefaultAuthentication("user", emptyMap())
         ))
 
-        val response: HttpResponse<String> = assertDoesNotThrow { client.toBlocking().exchange(HttpRequest.GET<String>("/me").bearerAuth("foobar"), String::class.java) }
+        val response: HttpResponse<String> = assertDoesNotThrow { client.toBlocking().exchange(HttpRequest.GET<String>("/me").bearerAuth("token"), String::class.java) }
 
         assertEquals(response.body(), """{"name":"user"}""")
 
-        verify(tokenValidator, atLeastOnce()).validateToken(any())
+        verify(tokenValidator, times(1)).validateToken(anyString(), any())
     }
 
     @Test
