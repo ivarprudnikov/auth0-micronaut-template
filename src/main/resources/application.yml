@@ -5,6 +5,7 @@ micronaut:
     cors:
       enabled: true
   security:
+    authentication: bearer
     enabled: true
     ip-patterns: []
     endpoints:

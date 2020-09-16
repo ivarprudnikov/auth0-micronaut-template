@@ -2,18 +2,18 @@ package com.ivarprudnikov.auth0
 
 import com.amazonaws.serverless.proxy.internal.testutils.AwsProxyRequestBuilder
 import com.amazonaws.serverless.proxy.internal.testutils.MockLambdaContext
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.shouldBe
 import io.micronaut.context.ApplicationContext
 import io.micronaut.function.aws.proxy.MicronautLambdaContainerHandler
 import io.micronaut.http.HttpStatus
 import io.micronaut.test.annotation.MicronautTest
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 @MicronautTest
-class AWSProxyTest : StringSpec({
+class AWSProxyTest {
 
-    // TODO it is not what I would expect when cors is enabled
-    "proxy OPTIONS request to / returns 405?" {
+    @Test
+    fun proxy_OPTIONS_request_to_root_returns_ok() {
         val handler = MicronautLambdaContainerHandler(
                 ApplicationContext.builder()
                         .deduceEnvironment(true)
@@ -34,6 +34,6 @@ class AWSProxyTest : StringSpec({
                 .header("TE", "Trailers")
                 .build()
         val resp = handler.proxy(req, lambdaContext)
-        resp.statusCode shouldBe HttpStatus.METHOD_NOT_ALLOWED.code
+        assertEquals(resp.statusCode, HttpStatus.OK.code)
     }
-})
+}
