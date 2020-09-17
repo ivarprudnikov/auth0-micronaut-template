@@ -14,7 +14,7 @@ install:
 - pip --version
 - pip install awscli aws-sam-cli
 - export PATH=$PATH:$HOME/.local/bin
-script: ./gradlew clean build --info
+script: ./gradlew clean build shadowJar --info
 deploy:
 - provider: script
   skip_cleanup: true
