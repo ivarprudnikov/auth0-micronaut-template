@@ -6,7 +6,7 @@ Description: Micronaut server utilizing proxy requests through API Gateway
 # SAM Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Runtime: java8
+    Runtime: java11
     Timeout: 20
     MemorySize: 1024
   Api:
