@@ -1,0 +1,41 @@
+version: 2
+updates:
+- package-ecosystem: gradle
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: io.micronaut:micronaut-bom
+    versions:
+    - 2.3.0
+    - 2.3.2
+    - 2.3.3
+    - 2.3.4
+    - 2.4.0
+    - 2.4.1
+  - dependency-name: org.jetbrains.kotlin:kotlin-stdlib-jdk8
+    versions:
+    - 1.4.21-2
+    - 1.4.30
+    - 1.4.31
+  - dependency-name: org.jetbrains.kotlin.jvm
+    versions:
+    - 1.4.21-2
+    - 1.4.30
+    - 1.4.31
+  - dependency-name: org.jetbrains.kotlin:kotlin-reflect
+    versions:
+    - 1.4.21-2
+    - 1.4.30
+    - 1.4.31
+  - dependency-name: org.jetbrains.kotlin.plugin.allopen
+    versions:
+    - 1.4.21-2
+    - 1.4.30
+    - 1.4.31
+  - dependency-name: org.jetbrains.kotlin.kapt
+    versions:
+    - 1.4.21-2
+    - 1.4.30
+    - 1.4.31
