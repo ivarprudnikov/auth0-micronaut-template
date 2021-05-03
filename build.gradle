@@ -23,7 +23,7 @@ dependencies {
 
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.10")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.0")
 
     // Micronaut main deps
     kapt(platform("io.micronaut:micronaut-bom:2.4.2"))
