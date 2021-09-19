@@ -26,7 +26,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.10")
 
     // Micronaut main deps
-    kapt(platform("io.micronaut:micronaut-bom:2.3.1"))
+    kapt(platform("io.micronaut:micronaut-bom:2.4.2"))
     implementation(platform("io.micronaut:micronaut-bom:2.3.1"))
     implementation("io.micronaut:micronaut-runtime")
     implementation("javax.annotation:javax.annotation-api")
@@ -47,9 +47,9 @@ dependencies {
     kapt("io.micronaut:micronaut-validation")
 
     // Logs
-    implementation("org.apache.logging.log4j:log4j-core:2.14.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.14.1")
     runtimeOnly("org.apache.logging.log4j:log4j-api:2.14.1")
-    runtimeOnly("org.apache.logging.log4j:log4j-slf4j-impl:2.14.0")
+    runtimeOnly("org.apache.logging.log4j:log4j-slf4j-impl:2.14.1")
     runtimeOnly("com.amazonaws:aws-lambda-java-log4j2:1.2.0")
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -60,9 +60,9 @@ dependencies {
     }
 
     // Testing
-    kaptTest(enforcedPlatform("io.micronaut:micronaut-bom:2.2.3"))
+    kaptTest(enforcedPlatform("io.micronaut:micronaut-bom:2.4.2"))
     kaptTest("io.micronaut:micronaut-inject-java")
-    testImplementation(enforcedPlatform("io.micronaut:micronaut-bom:2.2.2"))
+    testImplementation(enforcedPlatform("io.micronaut:micronaut-bom:2.4.2"))
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("io.micronaut.test:micronaut-test-junit5")
     testImplementation("org.mockito:mockito-core:2.+")
