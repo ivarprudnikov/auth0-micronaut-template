@@ -1,0 +1,29 @@
+name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+      - name: Test and build
+        run: ./gradlew clean build shadowJar --info
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+      - name: Install aws sam cli
+        run: pip install awscli aws-sam-cli && export PATH=$PATH:$HOME/.local/bin
+      - name: Deploy to AWS (if master)
+        if: ${{ github.ref == 'refs/heads/master' }}
+        env:
+          SAM_CLI_TELEMETRY: 0
+          AWS_DEFAULT_REGION: eu-west-1
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+        run: LAMBDA_APP_NAME=auth0-micronaut-template bash build-deploy.sh
