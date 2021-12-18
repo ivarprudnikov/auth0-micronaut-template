@@ -1,5 +1,8 @@
 name: CI
-on: [push]
+on:
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,7 +22,7 @@ jobs:
           python-version: '3.7'
       - name: Install aws sam cli
         run: pip install awscli aws-sam-cli && export PATH=$PATH:$HOME/.local/bin
-      - name: Deploy to AWS (if master)
+      - name: Deploy to AWS
         if: ${{ github.ref == 'refs/heads/master' }}
         env:
           SAM_CLI_TELEMETRY: 0
