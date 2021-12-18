@@ -1,7 +1,7 @@
 Auth0 Micronaut template
 ======================== 
 
-[![Build Status](https://travis-ci.com/ivarprudnikov/auth0-micronaut-template.svg?branch=master)](https://travis-ci.com/ivarprudnikov/auth0-micronaut-template) 
+[![CI](https://github.com/ivarprudnikov/auth0-micronaut-template/actions/workflows/deploy.yml/badge.svg)](https://github.com/ivarprudnikov/auth0-micronaut-template/actions/workflows/deploy.yml) 
 [![GitHub issues](https://img.shields.io/github/issues/ivarprudnikov/auth0-micronaut-template.svg)](https://github.com/ivarprudnikov/auth0-micronaut-template/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/ivarprudnikov/auth0-micronaut-template.svg)](https://github.com/ivarprudnikov/auth0-micronaut-template/commits/master)
 
