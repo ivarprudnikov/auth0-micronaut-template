@@ -1,7 +1,7 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.4.10"
-    id "org.jetbrains.kotlin.kapt" version "1.4.10"
-    id "org.jetbrains.kotlin.plugin.allopen" version "1.4.10"
+    id "org.jetbrains.kotlin.jvm" version "1.6.10"
+    id "org.jetbrains.kotlin.kapt" version "1.6.10"
+    id "org.jetbrains.kotlin.plugin.allopen" version "1.6.10"
     id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 
@@ -22,8 +22,8 @@ configurations {
 dependencies {
 
     // Kotlin
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
 
     // Micronaut main deps
     kapt(platform("io.micronaut:micronaut-bom:2.4.2"))
