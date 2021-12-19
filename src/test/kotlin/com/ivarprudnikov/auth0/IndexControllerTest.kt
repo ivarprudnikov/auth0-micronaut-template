@@ -6,7 +6,7 @@ import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.security.authentication.DefaultAuthentication
 import io.micronaut.security.token.validator.TokenValidator
-import io.micronaut.test.annotation.MicronautTest
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.micronaut.test.annotation.MockBean
 import io.reactivex.Flowable
 import org.junit.jupiter.api.Assertions.assertEquals

@@ -5,7 +5,7 @@ import com.amazonaws.serverless.proxy.internal.testutils.MockLambdaContext
 import io.micronaut.context.ApplicationContext
 import io.micronaut.function.aws.proxy.MicronautLambdaContainerHandler
 import io.micronaut.http.HttpStatus
-import io.micronaut.test.annotation.MicronautTest
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
